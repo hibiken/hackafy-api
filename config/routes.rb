@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     end
 
     patch 'me/avatar' => 'avatar_images#update'
+    patch 'me' => 'users#update'
   end
 end
