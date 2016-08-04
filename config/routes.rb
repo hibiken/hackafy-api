@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     patch 'me/avatar' => 'avatar_images#update'
     patch 'me' => 'users#update'
 
-    resources :posts, only: [:create]
+    resources :posts, only: [:index, :create]
   end
 end
