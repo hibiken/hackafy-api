@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    posts = Post.all
+    posts = Post.all.order(created_at: :desc)
     render json: posts, status: 200
   end
 
