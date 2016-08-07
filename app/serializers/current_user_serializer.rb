@@ -1,6 +1,6 @@
 class CurrentUserSerializer < ActiveModel::Serializer
   attributes :id, :created_at, :authentication_token,
-             :post_ids, :attrs
+             :attrs, :post_ids, :liked_post_ids
 
   has_many :posts
 

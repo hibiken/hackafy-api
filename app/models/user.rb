@@ -15,4 +15,12 @@ class User < ApplicationRecord
     user = User.find_by(email: email_or_username) || User.find_by(username: email_or_username)
     user && user.authenticate(password)
   end
+
+  def like!(post)
+    likes.where(post_id: post.id).first_or_create!
+  end
+
+  def dislike!(post)
+    likes.where(post_id: post.id).destroy_all
+  end
 end
