@@ -4,7 +4,7 @@ class Users::PostsController < ApplicationController
 
   def index
     if @user.present?
-      render json: @user.posts, status: 200
+      render json: @user.posts.order(created_at: :desc), status: 200
     else
       render json: { errors: ["User not found"] }, status: 422
     end
