@@ -17,5 +17,7 @@ Rails.application.routes.draw do
       resource :likes, only: [:create, :destroy], module: :posts
       resources :comments, only: [:create], module: :posts
     end
+
+    resources :locations, only: [:show]
   end
 end
