@@ -4,7 +4,7 @@ class RelationshipsController < ApplicationController
 
   def create
     if current_user.follow(@user)
-      render json: @user, serializer: UserSimpleSerializer, status: 200
+      render json: @user, status: 200
     else
       render json: { errors: ['Could not follow user'] }, status: 422
     end
@@ -12,7 +12,7 @@ class RelationshipsController < ApplicationController
 
   def destroy
     if current_user.unfollow(@user)
-      render json: @user, serializer: UserSimpleSerializer, status: 200
+      render json: @user, status: 200
     else
       render json: { errors: ['Could not unfollow user'] }, status: 422
     end
