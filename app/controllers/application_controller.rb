@@ -6,6 +6,16 @@ class ApplicationController < ActionController::API
     authenticate_user_from_token || render_unauthorized
   end
 
+  def pagination_dict(object)
+    {
+      current_page: object.current_page,
+      next_page: object.next_page,
+      prev_page: object.previous_page,
+      total_pages: object.total_pages,
+      total_count: object.total_entries
+    }
+  end
+
   protected
 
     def authenticate_user_from_token

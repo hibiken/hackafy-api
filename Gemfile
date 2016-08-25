@@ -9,6 +9,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 gem 'active_model_serializers', '~> 0.10.2'
 gem 'carrierwave', '~> 0.11.2'
+gem 'will_paginate', '~> 3.1'
 # gem 'redis', '~> 3.0'
 
 

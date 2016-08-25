@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope '/api' do
     namespace :users do
-      resources :notifications, only: [:index]
+      resources :notifications, only: [:index, :update]
       resource :notification_counts, only: [:show, :destroy]
       post 'signup' => 'registrations#create'
       post 'signin' => 'sessions#create'
