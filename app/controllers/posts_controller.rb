@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    posts = Post.all.order(created_at: :desc)
-    render json: posts, status: 200
+    posts = Post.get_page(params[:page])
+    render json: posts, meta: pagination_dict(posts), status: 200
   end
 
   def create

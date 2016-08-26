@@ -8,4 +8,6 @@ class Post < ApplicationRecord
   validates :photo, presence: true
 
   mount_uploader :photo, PhotoUploader
+
+  scope :get_page, -> (page) { includes(:user).order(created_at: :desc).paginate(page: page, per_page: 3) }
 end
