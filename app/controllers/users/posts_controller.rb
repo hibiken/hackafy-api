@@ -4,7 +4,8 @@ class Users::PostsController < ApplicationController
 
   def index
     if @user.present?
-      render json: @user.posts.order(created_at: :desc), status: 200
+      posts = @user.posts.get_page(params[:page], 9)
+      render json: posts, meta: pagination_dict(posts), status: 200
     else
       render json: { errors: ["User not found"] }, status: 422
     end

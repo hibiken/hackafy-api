@@ -9,5 +9,7 @@ class Post < ApplicationRecord
 
   mount_uploader :photo, PhotoUploader
 
-  scope :get_page, -> (page) { includes(:user).order(created_at: :desc).paginate(page: page, per_page: 3) }
+  scope :get_page, -> (page, per_page = 3) {
+    includes(:user).order(created_at: :desc).paginate(page: page, per_page: per_page)
+  }
 end
