@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resource :notification_counts, only: [:show, :destroy]
       post 'signup' => 'registrations#create'
       post 'signin' => 'sessions#create'
+      post 'facebook/login' => 'facebook_logins#create'
       get ':username/posts' => 'posts#index'
       get ':username/public_profile' => 'public_profiles#show'
       get ':username/followers' => 'followers#index'

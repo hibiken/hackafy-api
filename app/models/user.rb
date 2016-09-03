@@ -18,10 +18,10 @@ class User < ApplicationRecord
   has_secure_password
   EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false },
-                    format: { with: EMAIL_REGEX }
+                    format: { with: EMAIL_REGEX }, unless: :facebook_login?
   validates :username, presence: true, uniqueness: { case_sensitive: false },
                        length: { in: 2..30 }
-  validates :password, length: { minimum: 8 }
+  validates :password, length: { minimum: 8 }, unless: :facebook_login?
 
   mount_uploader :avatar, AvatarUploader
 
@@ -49,5 +49,17 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following_ids.include?(other_user.id)
+  end
+
+  def facebook_login?
+    facebook_id.present?
+  end
+
+  def avatar_url
+    if facebook_login?
+      "http://graph.facebook.com/#{facebook_id}/picture?type=normal"
+    else
+      avatar.url
+    end
   end
 end

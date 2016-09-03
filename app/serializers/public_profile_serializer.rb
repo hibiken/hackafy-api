@@ -3,7 +3,7 @@ class PublicProfileSerializer < ActiveModel::Serializer
              :following_count
 
   def avatar_url
-    object.avatar.url
+    object.avatar_url
   end
 
   def followers_count
