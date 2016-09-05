@@ -3,10 +3,10 @@ class NotificationSerializer < ActiveModel::Serializer
              :photoUrl
 
   def actor
-    { 
+    {
       'username' => object.actor.username, 
       'id' => object.actor_id,
-      'avatarUrl' => object.actor.avatar.url
+      'avatarUrl' => object.actor.avatar_url
     }
   end
 
