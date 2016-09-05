@@ -1,6 +1,5 @@
 class Users::FacebookLoginsController < ApplicationController
   def create
-    # TODO: find by either facebook_id OR email
     @user = User.find_by(facebook_id: params[:facebook_id]) if params[:facebook_id].present?
     if @user
       render json: @user, serializer: CurrentUserSerializer, status: 200
@@ -13,8 +12,15 @@ class Users::FacebookLoginsController < ApplicationController
   private
 
     def user_params
-      # TODO: create unique username
-      # TODO: generate random password
-      params.permit(:facebook_id, :username).merge(password: 'password')
+      username = generate_unique_username
+      params.permit(:facebook_id).merge(username: username)
+    end
+
+    def generate_unique_username
+      name = params[:username].split.join('-')
+      loop do
+        username = name + SecureRandom.random_number(10000..99999)
+        break username unless User.exists?(username: username)
+      end
     end
 end
