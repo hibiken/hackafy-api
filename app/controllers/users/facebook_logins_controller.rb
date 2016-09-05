@@ -19,7 +19,7 @@ class Users::FacebookLoginsController < ApplicationController
     def generate_unique_username
       name = params[:username].split.join('-')
       loop do
-        username = name + SecureRandom.random_number(10000..99999)
+        username = name + SecureRandom.random_number(10000..99999).to_s
         break username unless User.exists?(username: username)
       end
     end
