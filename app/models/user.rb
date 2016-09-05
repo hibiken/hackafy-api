@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   has_many :notifications, dependent: :destroy, foreign_key: :recipient_id
 
-  has_secure_password, validations: false
+  has_secure_password validations: false
   EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false },
                     format: { with: EMAIL_REGEX }, unless: :facebook_login?
