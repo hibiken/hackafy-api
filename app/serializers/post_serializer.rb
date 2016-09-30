@@ -1,6 +1,7 @@
 class PostSerializer < ActiveModel::Serializer
   attributes :id, :photo_url, :filter, :caption, :created_at, :user_id,
-             :lat_lng, :address, :place_id, :likes_count, :comments_count
+             :lat_lng, :address, :place_id, :likes_count, :comments_count,
+             :filter_style
 
   belongs_to :user, serializer: UserSerializer
   has_many :comments
@@ -11,6 +12,14 @@ class PostSerializer < ActiveModel::Serializer
 
   def lat_lng
     { lat: object.lat, lng: object.lng }
+  end
+
+  def filter_style
+    if object.filter_style.nil?
+      ''
+    else
+      object.filter_style
+    end
   end
 
 end

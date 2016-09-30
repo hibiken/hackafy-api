@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.permit(:photo, :caption, :filter, :address, :lat, :lng, :place_id)
+      params.permit(:photo, :caption, :filter, :address, :lat, :lng, :place_id, :filter_style)
     end
 
     # TODO: should this be capsulated in Post#save method?
