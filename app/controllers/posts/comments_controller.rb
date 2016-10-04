@@ -2,6 +2,11 @@ class Posts::CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post
 
+  def index
+    comments = @post.comments.latest.paginate(page: params[:page])
+    render json: comments, meta: pagination_dict(comments), status: 200
+  end
+
   def create
     comment = @post.comments.build(comment_params.merge(user_id: current_user.id))
     if comment.save
