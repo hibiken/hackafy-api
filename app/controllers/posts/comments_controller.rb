@@ -12,6 +12,12 @@ class Posts::CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    comment = current_user.comments.find(params[:id])
+    comment.destroy
+    head 204
+  end
+
   private
 
     def set_post
