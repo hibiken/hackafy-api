@@ -265,6 +265,7 @@ GEM
       builder
       nokogiri (>= 1.4.1)
       trollop
+    redis (3.3.1)
     slop (3.6.0)
     spring (1.7.2)
     spring-watcher-listen (2.0.0)
@@ -305,10 +306,14 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.0.0)
   rails_12factor
+  redis (~> 3.0)
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
   will_paginate (~> 3.1)
+
+RUBY VERSION
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.12.5

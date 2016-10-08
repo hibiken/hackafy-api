@@ -26,5 +26,7 @@ Rails.application.routes.draw do
     end
 
     resources :locations, only: [:show]
+
+    mount ActionCable.server => '/cable'
   end
 end
