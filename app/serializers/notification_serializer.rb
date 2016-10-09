@@ -20,13 +20,17 @@ class NotificationSerializer < ActiveModel::Serializer
     case object.action_type
     when 'LIKE_POST'
       like_post_meatadata
+    when 'START_FOLLOWING'
+      start_following_metadata
     end
   end
 
   private
     def like_post_meatadata
-      {
-        'likesCount' => object.notifiable.reload.likes_count
-      }
+      { 'likesCount' => object.notifiable.reload.likes_count }
+    end
+
+    def start_following_metadata
+      { 'followerIds' => object.notifiable.follower_ids }
     end
 end

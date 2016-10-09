@@ -4,7 +4,7 @@ class RelationshipsController < ApplicationController
 
   def create
     if current_user.follow(@user)
-      Notification.create!(actor: current_user, recipient: @user, notifiable: @user, action_type: 'START_FOLLOWING')
+      create_notification
       render json: @user, status: 200
     else
       render json: { errors: ['Could not follow user'] }, status: 422
@@ -23,5 +23,16 @@ class RelationshipsController < ApplicationController
 
     def set_user
       @user = User.find(params[:user_id])
+    end
+
+    def create_notification
+      notification = Notification.create!(actor: current_user, recipient: @user,
+          notifiable: @user, action_type: 'START_FOLLOWING')
+
+      serializable_resource = ActiveModelSerializers::SerializableResource.new(notification, {})
+      ActionCable.server.broadcast(
+        "web_notifications_#{@user.id}",
+        serializable_resource
+      )
     end
 end
