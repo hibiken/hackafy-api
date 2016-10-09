@@ -35,8 +35,14 @@ class Posts::CommentsController < ApplicationController
 
     def create_notification
       unless current_user.id == @post.user.id
-        Notification.create!(actor: current_user, recipient: @post.user,
+        notification = Notification.create!(actor: current_user, recipient: @post.user,
                              notifiable: @post, action_type: 'COMMENT_ON_POST')
+
+        serializable_resource = ActiveModelSerializers::SerializableResource.new(notification, {})
+        ActionCable.server.broadcast(
+          "web_notifications_#{@post.user.id}",
+          serializable_resource
+        )
       end
     end
 end
