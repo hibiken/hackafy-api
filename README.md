@@ -1,24 +1,24 @@
-# README
+# Hackafy API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API server for [Hackafy](https://github.com/kenny-hibino/hackafy) (Instagram clone) built with Ruby on Rails
 
-Things you may want to cover:
+Demo: [Hosted on Heroku](https://radiant-temple-15197.herokuapp.com/)
 
-* Ruby version
+## Install
 
-* System dependencies
+Clone this repository and run PostgreSQL, Redis servers.
+Using Redis for ActionCable features.
 
-* Configuration
+After cloning the repository, run
 
-* Database creation
+```
+bundle install
+rails db:setup
+rails server -p 5000
+```
 
-* Database initialization
+Client side applications, both [Web](https://github.com/kenny-hibino/hackafy) and [Native](https://github.com/kenny-hibino/hackafy-native) are configured to use `localhost:5000` as an API endpoint
 
-* How to run the test suite
+## Contribution
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Feedbacks, and issue reports are more than welcome :)
