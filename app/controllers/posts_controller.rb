@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.get_page(params[:page])
-    render json: posts, meta: pagination_dict(posts), test: 'hello params', status: 200
+    render json: posts, meta: pagination_dict(posts), status: 200
   end
 
   def create
