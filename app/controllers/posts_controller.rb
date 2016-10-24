@@ -7,12 +7,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
-    if @post.save
-      create_tags
-      render json: @post, status: 201
+    post = current_user.posts.build(post_params)
+    post_builder = Post::Create.new(post)
+    if post_builder.run
+      render json: post_builder.post, status: 201
     else
-      render json: { errors: @post.errors.full_messages }, status: 422
+      render json: { errors: post_builder.post.errors.full_messages }, status: 422
     end
   end
 
@@ -20,12 +20,5 @@ class PostsController < ApplicationController
 
     def post_params
       params.permit(:photo, :caption, :filter, :address, :lat, :lng, :place_id, :filter_style)
-    end
-
-    # TODO: should this be capsulated in Post#save method?
-    def create_tags
-      @post.tags = @post.caption.scan(/#\w+/).map do |name| 
-        Tag.where(name: name[1..-1]).first_or_initialize
-      end
     end
 end
