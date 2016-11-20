@@ -3,8 +3,8 @@ class Users::FollowingController < ApplicationController
   before_action :set_user
 
   def index
-    following = @user.following
-    render json: following, status: 200
+    following = @user.following.paginate(page: params[:page], per_page: 10)
+    render json: following, meta: pagination_dict(following), status: 200
   end
 
   private
